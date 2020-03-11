@@ -8,15 +8,13 @@ class Menu extends Model
 {
     protected $table = 'menu';
 
-    protected $fillable = ['restaurant_id','menu_cat','menu_name', 'description','price','menu_image'];
+    protected $fillable = ['restaurant_id', 'menu_cat', 'menu_name', 'description', 'price', 'quantity', 'menu_image'];
 
+    public $timestamps = false;
 
-	public $timestamps = false; 
+    public static function getMenunfo($id)
+    {
+        return Menu::find($id);
+    }
 
-
-	public static function getMenunfo($id) 
-    { 
-		return Menu::find($id);
-	}
-	 
 }

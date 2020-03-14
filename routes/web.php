@@ -81,6 +81,12 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
     Route::post('menu/addmenu', 'MenuController@addnew');
     Route::get('menu/delete/{menu_id}', 'MenuController@delete');
 
+    Route::get('stock', 'StockController@owner_stock');
+    Route::get('stock/addstock', 'StockController@owner_addeditstock');
+    Route::get('stock/addstock/{menu_id}', 'StockController@owner_editstock');
+    Route::post('stock/addstock', 'StockController@addnew');
+    Route::get('stock/delete/{stock_id}', 'StockController@delete');
+
     Route::get('orderlist', 'OrderController@owner_orderlist');
     Route::get('orderlist/{order_id}/{status}', 'OrderController@owner_order_status');
     Route::get('orderlist/{order_id}', 'OrderController@owner_delete');

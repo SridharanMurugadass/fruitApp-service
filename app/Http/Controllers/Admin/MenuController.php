@@ -47,10 +47,11 @@ class MenuController extends MainAdminController
         }
 
         $categories = Categories::where("restaurant_id", $id)->orderBy('category_name')->get();
+        $menu_types = ['Quantity' => 'Quantity', 'Weight' => 'Weight'];
 
         $restaurant_id = $id;
 
-        return view('admin.pages.addeditmenu', compact('categories', 'restaurant_id'));
+        return view('admin.pages.addeditmenu', compact('categories', 'restaurant_id', 'menu_types'));
     }
 
     public function addnew(Request $request)
@@ -62,8 +63,13 @@ class MenuController extends MainAdminController
             'menu_cat'  => 'required',
             'menu_name' => 'required',
             'price'     => 'required',
-            'quantity'  => 'required',
+            'type'      => 'required',
         ];
+
+        if ($request->has('type') && $request->has('type')) {
+            $typeField = ('Quantity' == $request->type) ? 'quantity' : 'weight';
+            $rule      = array_merge($rule, [$typeField => 'required']);
+        }
 
         $validator = \Validator::make($data, $rule);
 
@@ -102,8 +108,10 @@ class MenuController extends MainAdminController
         $menu->menu_cat      = $inputs['menu_cat'];
         $menu->menu_name     = $inputs['menu_name'];
         $menu->description   = $inputs['description'];
+        $menu->type          = $inputs['type'];
         $menu->price         = $inputs['price'];
-        $menu->quantity      = $inputs['quantity'];
+        $menu->quantity      = ('Quantity' == $menu->type) ? $inputs['quantity'] : null;
+        $menu->weight        = ('Weight' == $menu->type) ? $inputs['weight'] : null;
 
         $menu->save();
 
@@ -131,10 +139,11 @@ class MenuController extends MainAdminController
         $menu = Menu::findOrFail($menu_id);
 
         $categories = Categories::where("restaurant_id", $id)->orderBy('category_name')->get();
+        $menu_types = ['Quantity' => 'Quantity', 'Weight' => 'Weight'];
 
         $restaurant_id = $id;
 
-        return view('admin.pages.addeditmenu', compact('menu', 'categories', 'restaurant_id'));
+        return view('admin.pages.addeditmenu', compact('menu', 'categories', 'restaurant_id', 'menu_types'));
     }
 
     public function delete($menu_id)
@@ -193,7 +202,9 @@ class MenuController extends MainAdminController
 
         $categories = Categories::where("restaurant_id", $restaurant_id)->orderBy('category_name')->get();
 
-        return view('admin.pages.owner.addeditmenu', compact('categories', 'restaurant_id'));
+        $menu_types = ['Quantity' => 'Quantity', 'Weight' => 'Weight'];
+
+        return view('admin.pages.owner.addeditmenu', compact('categories', 'restaurant_id', 'menu_types'));
     }
 
     public function owner_editmenu($menu_id)
@@ -215,6 +226,8 @@ class MenuController extends MainAdminController
 
         $categories = Categories::where("restaurant_id", $restaurant_id)->orderBy('category_name')->get();
 
-        return view('admin.pages.owner.addeditmenu', compact('menu', 'categories', 'restaurant_id'));
+        $menu_types = ['Quantity' => 'Quantity', 'Weight' => 'Weight'];
+
+        return view('admin.pages.owner.addeditmenu', compact('menu', 'categories', 'restaurant_id', 'menu_types'));
     }
 }

@@ -26,8 +26,10 @@
             <tr>
                 <th>Name</th>
                 <th>Description</th>
-                <th>Price</th>
+                <th>Type</th>
                 <th>Quantity</th>
+                <th>Weight</th>
+                <th>Price</th>
                 <th>Image</th>
                 <th class="text-center width-100">Action</th>
             </tr>
@@ -38,8 +40,10 @@
             <tr>
                 <td>{{ $item->menu_name }}</td>
                 <td>{{ $item->description }}</td>
-                <td>{{ $item->price }}</td>
+                <td>{{ $item->weight }}</td>
+                <td>{{ $item->type }}</td>
                 <td>{{ $item->quantity }}</td>
+                <td>{{ $item->price }}</td>
                 <td>
                     @if($item->menu_image)
 

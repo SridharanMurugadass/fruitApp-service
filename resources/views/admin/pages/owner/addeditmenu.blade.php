@@ -34,10 +34,10 @@
                 <input type="hidden" name="id" value="{{ isset($menu->id) ? $menu->id : null }}">
 
                 <div class="form-group">
-                    <label for="" class="col-sm-3 control-label">Menu category</label>
+                    <label for="" class="col-sm-3 control-label">Category</label>
                     <div class="col-sm-4">
                         <select id="basic" name="menu_cat" class="selectpicker show-tick form-control">
-                            <option value="">Select Type</option>
+                            <option value="">Select Category</option>
 
                             @foreach($categories as $i => $category)
                                 @if(isset($menu->menu_cat) && $menu->menu_cat==$category->id)
@@ -52,7 +52,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="" class="col-sm-3 control-label">Menu Name</label>
+                    <label for="" class="col-sm-3 control-label">Name</label>
                       <div class="col-sm-9">
                         <input type="text" name="menu_name" value="{{ isset($menu->menu_name) ? $menu->menu_name : null }}" class="form-control">
                     </div>
@@ -64,15 +64,50 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="" class="col-sm-3 control-label">Price</label>
-                      <div class="col-sm-9">
-                        <input id="touch-spin-2" data-toggle="touch-spin" data-min="-1000000" data-max="1000000" data-prefix="$" data-step="1" type="text" value="{{ isset($menu->price) ? $menu->price : null }}" name="price" class="form-control"/>
+                    <label for="" class="col-sm-3 control-label">Type</label>
+                    <div class="col-sm-4">
+                        <select id="type" name="type" class="selectpicker show-tick form-control js-menu_type">
+                            <option value="">Select Type</option>
+
+                            @foreach($menu_types as $key => $value)
+                                @if(isset($menu->type) && $menu->type==$key)
+                                    <option value="{{$key}}" selected >{{$value}}</option>
+
+                                @else
+                                <option value="{{$value}}">{{$value}}</option>
+                                @endif
+                            @endforeach
+                        </select>
                     </div>
                 </div>
-                <div class="form-group">
+                @php
+                    $qtyShow='hide';
+                    $weightShow='hide';
+
+                @endphp
+                @if(isset($menu->type))
+                 @if($menu->type == 'Quantity')
+                    @php $qtyShow='show';@endphp
+                 @elseif($menu->type == 'Weight')
+                    @php $weightShow='show';@endphp
+                 @endif
+                @endif
+                <div class="form-group js-quantity {{ $qtyShow }}">
                     <label for="" class="col-sm-3 control-label">Quantity</label>
                       <div class="col-sm-9">
                         <input type="text" value="{{ isset($menu->quantity) ? $menu->quantity : null }}" name="quantity" class="form-control"/>
+                    </div>
+                </div>
+                <div class="form-group js-weight {{ $weightShow }}">
+                    <label for="" class="col-sm-3 control-label">Weight</label>
+                      <div class="col-sm-9">
+                        <input type="text" value="{{ isset($menu->weight) ? $menu->weight : null }}" name="weight" class="form-control"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">Price</label>
+                      <div class="col-sm-9">
+                        <input id="touch-spin-2" data-toggle="touch-spin" data-min="-1000000" data-max="1000000" data-prefix="₹" data-step="1" type="text" value="{{ isset($menu->price) ? $menu->price : null }}" name="price" class="form-control"/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -107,5 +142,22 @@
 
 
 </div>
+<script type="text/javascript">
+$(document).ready(function() {
+   $(".js-menu_type").change(function() {
+        var selected = $(this).val();
+        if(selected == 'Quantity'){
+            $('.js-quantity').removeClass('hide');
+            $('.js-weight').removeClass('show');
+            $('.js-weight').addClass('hide');
+        }
 
+        if(selected == 'Weight') {
+           $('.js-weight').removeClass('hide');
+           $('.js-quantity').removeClass('show');
+           $('.js-quantity').addClass('hide');
+        }
+    });
+});
+</script>
 @endsection

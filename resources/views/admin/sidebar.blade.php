@@ -10,9 +10,9 @@
 
                		<li class="{{classActivePath('dashboard')}}"><a href="{{ URL::to('admin/dashboard') }}"><i class="fa fa-dashboard"></i>Dashboard</a></li>
 
-               		<li class="{{classActivePath('types')}}"><a href="{{ URL::to('admin/types') }}"><i class="fa fa-tags"></i>Restaurant Types</a></li>
+               		<li class="{{classActivePath('types')}}"><a href="{{ URL::to('admin/types') }}"><i class="fa fa-tags"></i>Store Types</a></li>
 
-               		<li class="{{classActivePath('restaurants')}}"><a href="{{ URL::to('admin/restaurants') }}"><i class="fa fa-cutlery"></i>Restaurants</a></li>
+               		<li class="{{classActivePath('restaurants')}}"><a href="{{ URL::to('admin/restaurants') }}"><i class="fa fa-cutlery"></i>Stored</a></li>
 
                		<li class="{{classActivePath('allorder')}}"><a href="{{ URL::to('admin/allorder') }}"><i class="fa fa-cart-plus"></i>Order List</a></li>
 
@@ -27,11 +27,13 @@
                	 	<li class="{{classActivePath('dashboard')}}"><a href="{{ URL::to('admin/dashboard') }}"><i class="fa fa-dashboard"></i>Dashboard</a></li>
 
 
-               		<li class="{{classActivePath('restaurants')}}"><a href="{{ URL::to('admin/myrestaurants') }}"><i class="fa fa-cutlery"></i>My Restaurants</a></li>
+               		<li class="{{classActivePath('restaurants')}}"><a href="{{ URL::to('admin/myrestaurants') }}"><i class="fa fa-cutlery"></i>My Store</a></li>
 
                		<li class="{{classActivePath('categories')}}"><a href="{{ URL::to('admin/categories') }}"><i class="fa fa-folder"></i>Categories</a></li>
 
                		<li class="{{classActivePath('menu')}}"><a href="{{ URL::to('admin/menu') }}"><i class="fa fa-folder"></i>Menu</a></li>
+
+               		<li class="{{classActivePath('stock')}}"><a href="{{ URL::to('admin/stock') }}"><i class="fa fa-folder"></i>Menu Stock</a></li>
 
                		<li class="{{classActivePath('orderlist')}}"><a href="{{ URL::to('admin/orderlist') }}"><i class="fa fa-cart-plus"></i>Order List</a></li>
 

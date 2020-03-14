@@ -26,8 +26,10 @@
             <tr>
                 <th>Name</th>
                 <th>Description</th>
-                <th>Price</th>
+                <th>Type</th>
                 <th>Quantity</th>
+                <th>Weight</th>
+                <th>Price</th>
                 <th class="text-center width-100">Action</th>
             </tr>
             </thead>
@@ -37,8 +39,10 @@
             <tr>
                 <td>{{ $item->menu_name }}</td>
                 <td>{{ $item->description }}</td>
-                <td>{{ $item->price }}</td>
+                <td>{{ $item->type }}</td>
                 <td>{{ $item->quantity }}</td>
+                <td>{{ $item->weight }}</td>
+                <td>{{ $item->price }}</td>
                 <td class="text-center">
                 <a href="{{ url('admin/menu/addmenu/'.$item->id) }}" class="btn btn-default btn-rounded"><i class="md md-edit"></i></a>
                 <a href="{{ url('admin/menu/delete/'.$item->id) }}" class="btn btn-default btn-rounded" onclick="return confirm('Are you sure? You will not be able to recover this.')"><i class="md md-delete"></i></a>
@@ -55,5 +59,4 @@
 </div>
 
 </div>
-
 @endsection

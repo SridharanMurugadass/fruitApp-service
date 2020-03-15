@@ -32,6 +32,8 @@ class CartController extends Controller
 
             $find_cart_item->item_price = $new_price;
 
+            $find_cart_item->weight = $find_cart_item->weight * $new_quantity;
+
             $find_cart_item->save();
         } else {
             $menu = Menu::findOrFail($item_id);
@@ -44,6 +46,8 @@ class CartController extends Controller
             $cart->item_name     = $menu->menu_name;
             $cart->item_price    = $menu->price;
             $cart->quantity      = '1';
+            $cart->type          = $menu->type;
+            $cart->weight        = $menu->weight;
 
             $cart->save();
         }
@@ -116,6 +120,8 @@ class CartController extends Controller
             $order->item_name     = $cart_item->item_name;
             $order->item_price    = $cart_item->item_price;
             $order->quantity      = $cart_item->quantity;
+            $order->type          = $cart_item->type;
+            $order->weight        = $cart_item->weight;
 
             $order->created_date = strtotime(date('Y-m-d'));
 

@@ -12,7 +12,7 @@
 
                		<li class="{{classActivePath('types')}}"><a href="{{ URL::to('admin/types') }}"><i class="fa fa-tags"></i>Store Types</a></li>
 
-               		<li class="{{classActivePath('restaurants')}}"><a href="{{ URL::to('admin/restaurants') }}"><i class="fa fa-cutlery"></i>Stored</a></li>
+               		<li class="{{classActivePath('restaurants')}}"><a href="{{ URL::to('admin/restaurants') }}"><i class="fa fa-cutlery"></i>Stores</a></li>
 
                		<li class="{{classActivePath('allorder')}}"><a href="{{ URL::to('admin/allorder') }}"><i class="fa fa-cart-plus"></i>Order List</a></li>
 

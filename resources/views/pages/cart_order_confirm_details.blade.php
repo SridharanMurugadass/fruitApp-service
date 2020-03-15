@@ -5,14 +5,14 @@
 @section('head_url', Request::url())
 
 @section("content")
- 
+
  <div class="sub-banner" style="background:url({{ URL::asset('upload/'.getcong('page_bg_image')) }}) no-repeat center top;">
     <div class="overlay">
       <div class="container">
         <h1>Order Confirmed</h1>
       </div>
     </div>
-  </div>   
+  </div>
 
   <div class="white_for_login">
     <div class="container margin_60">
@@ -29,11 +29,17 @@
               <tbody>
                 @foreach(\App\Cart::where('user_id',Auth::id())->orderBy('id')->get() as $n=>$order_item)
                 <tr>
-                    <td><strong>{{$order_item->quantity}}x</strong> {{$order_item->item_name}} </td>
+                    <td>
+                      @if($order_item->type == 'Quantity')
+                       <strong>{{$order_item->quantity}}</strong>x
+                      @else
+                       <strong>{{$order_item->weight / 1000}}</strong>Kg
+                      @endif
+                      {{$order_item->item_name}} </td>
                     <td><strong class="pull-right">{{getcong('currency_symbol')}}{{$order_item->item_price}}</strong></td>
                 </tr>
-                
-                     
+
+
                 @endforeach
 
                 <tr>
@@ -45,7 +51,7 @@
 
               </tbody>
             </table>
-            <a href="{{URL::to('myorder')}}" class="btn btn-submit">My Order</a> 
+            <a href="{{URL::to('myorder')}}" class="btn btn-submit">My Order</a>
             <div style="display:none;">{{\App\Cart::where('user_id', Auth::id())->delete()}}</div>
           </div>
         </div>

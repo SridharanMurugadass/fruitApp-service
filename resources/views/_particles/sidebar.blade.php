@@ -1,22 +1,34 @@
-<div class="col-md-3 col-sm-5 col-xs-12 side-bar">   
-        
+<div class="col-md-3 col-sm-5 col-xs-12 side-bar">
+
       <div id="cart_box">
       <h3>Your order <i class="fa fa-shopping-cart pull-right"></i></h3>
       <table class="table table_summary">
       <tbody>
       </tbody>
-      </table>  
+      </table>
       @foreach(\App\Cart::where('user_id',Auth::id())->orderBy('id')->get() as $n=>$cart_item)
             <table class="table table_summary">
               <tbody>
               <tr>
-                <td><a href="{{URL::to('delete_item/'.$cart_item->id)}}" class="remove_item"><i class="fa fa-minus-circle"></i></a> <strong>{{$cart_item->quantity}}x</strong> {{$cart_item->item_name}} </td>
+                <td>
+                  {{$cart_item->item_name}}
+                </td>
                 <td><strong class="pull-right">{{getcong('currency_symbol')}}{{$cart_item->item_price}}</strong></td>
               </tr>
+              <tr>
+                <td>
+                  <a href="{{URL::to('delete_item/'.$cart_item->id)}}" class="remove_item"><i class="fa fa-minus-circle"></i></a>
+                  @if($cart_item->type == 'Quantity')
+                    <strong>{{$cart_item->quantity}}</strong>x
+                  @else
+                    <strong>{{$cart_item->weight / 1000}}</strong>Kg
+                  @endif
+
+              </tr>
              </tbody>
-            </table> 
-      @endforeach    
-        
+            </table>
+      @endforeach
+
       <hr>
       @if(DB::table('cart')->where('user_id', Auth::id())->sum('item_price')>0)
       <table class="table table_summary">
@@ -29,15 +41,15 @@
         </tbody>
       </table>
       <hr>
-          <a class="btn_full" href="{{URL::to('order_details')}}">Order now</a>  
+          <a class="btn_full" href="{{URL::to('order_details')}}">Order now</a>
           @else
-            <a class="btn_full" href="#0">Empty Cart</a>  
+            <a class="btn_full" href="#0">Empty Cart</a>
           @endif
-    </div>  
+    </div>
 
         <div id="cart_box" class="categories">
             <h3>Type</h3>
-             
+
             <ul>
              <li>
                 <label><a href="{{URL::to('restaurants/')}}">All</a></label>
@@ -47,14 +59,14 @@
                 <label><a href="{{URL::to('restaurants/type/'.$type->id)}}">{{$type->type}}</a></label>
               </li>
               @endforeach
-              
-            </ul>
-          </div>  
 
-           
-      <div id="help" class="box_style_2"> 
+            </ul>
+          </div>
+
+
+      <div id="help" class="box_style_2">
       <i class="fa fa-life-bouy"></i>
         <h4>{{getcong_widgets('need_help_title')}}</h4>
-        <a href="tel://{{getcong_widgets('need_help_phone')}}" class="phone">{{getcong_widgets('need_help_phone')}}</a> <small>{{getcong_widgets('need_help_time')}}</small> 
+        <a href="tel://{{getcong_widgets('need_help_phone')}}" class="phone">{{getcong_widgets('need_help_phone')}}</a> <small>{{getcong_widgets('need_help_time')}}</small>
       </div>
 </div>

@@ -2703,8 +2703,6 @@ var unemployment = [{
         buttonName:'btn-default'
     });
 
-    $('#data-table').dataTable();
-
     // activate showMail toggle for under 768 px;
     $('[data-toggle="showMail"]').on('click', function () {
         if ($( window ).width() < 768) $('.email > .media-body').toggle();

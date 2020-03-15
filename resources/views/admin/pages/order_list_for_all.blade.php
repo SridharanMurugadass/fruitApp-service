@@ -3,10 +3,10 @@
 @section("content")
 <div id="main">
 	<div class="page-header">
-		
-		
+
+
 		<h2>All Order List</h2>
-         
+
 	</div>
 	@if(Session::has('flash_message'))
 				    <div class="alert alert-success">
@@ -15,10 +15,10 @@
 				        {{ Session::get('flash_message') }}
 				    </div>
 	@endif
-     
+
 <div class="panel panel-default panel-shadow">
     <div class="panel-body">
-         
+
         <table id="order_data_table" class="table table-striped table-hover dt-responsive" cellspacing="0" width="100%">
             <thead>
             <tr>
@@ -30,9 +30,10 @@
                 <th>Restaurants </th>
                 <th>Menu Name</th>
                 <th>Quantity</th>
+                <th>Weight</th>
                 <th>Item Price</th>
                 <th>Total Price</th>
-                <th>Status</th>                           
+                <th>Status</th>
                 <th class="text-center width-100">Action</th>
             </tr>
             </thead>
@@ -49,6 +50,7 @@
                 </td>
                 <td>{{ $order->item_name }}</td>
                 <td>{{ $order->quantity }}</td>
+                <td>{{ $order->weight }}</td>
                 <td>{{getcong('currency_symbol')}}{{ \App\Menu::getMenunfo($order->item_id)->price }}</td>
                 <td>{{getcong('currency_symbol')}}{{ $order->item_price }}</td>
                 <td>{{ $order->status }}</td>
@@ -57,29 +59,30 @@
                                 <button type="button" class="btn btn-default-dark dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                     Actions <span class="caret"></span>
                                 </button>
-                                <ul class="dropdown-menu dropdown-menu-right" role="menu"> 
+                                <ul class="dropdown-menu dropdown-menu-right" role="menu">
                                     <li><a href="{{ url('admin/restaurants/view/'.$order->restaurant_id.'/orderlist/'.$order->id.'/Pending') }}"><i class="md md-lock"></i> Pending</a></li>
                                     <li><a href="{{ url('admin/restaurants/view/'.$order->restaurant_id.'/orderlist/'.$order->id.'/Processing') }}"><i class="md md-loop"></i> Processing</a></li>
                                     <li><a href="{{ url('admin/restaurants/view/'.$order->restaurant_id.'/orderlist/'.$order->id.'/Completed') }}"><i class="md md-done"></i> Completed</a></li>
                                     <li><a href="{{ url('admin/restaurants/view/'.$order->restaurant_id.'/orderlist/'.$order->id.'/Cancel') }}"><i class="md md-cancel"></i> Cancel</a></li>
                                     <li><a href="{{ url('admin/restaurants/view/'.$order->restaurant_id.'/orderlist/'.$order->id) }}"><i class="md md-delete"></i> Delete</a></li>
                                 </ul>
-                            </div> 
-                
+                            </div>
+
             </td>
-                
-                 
+
+
             </tr>
            @endforeach
-             
+
             </tbody>
         </table>
-         
+
         <script type="text/javascript">
             $(document).ready(function() {
-            
+
                 $('#order_data_table').dataTable({
-                    "order": [[ 0, "desc" ]]
+                    "order": [[ 0, "desc" ]],
+                     "scrollX": true
                 });
 
             } );

@@ -23,7 +23,6 @@
                   @else
                     <strong>{{$cart_item->weight / 1000}}</strong>Kg
                   @endif
-
               </tr>
              </tbody>
             </table>

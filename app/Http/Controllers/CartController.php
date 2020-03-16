@@ -139,6 +139,7 @@ class CartController extends Controller
                 'order_list' => $order_list,
 
             ];
+            \Log::info($order_list);
 
             $subject2 = 'New Order Placed';
 

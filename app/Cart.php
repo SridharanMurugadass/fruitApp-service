@@ -8,10 +8,8 @@ class Cart extends Model
 {
     protected $table = 'cart';
 
-    protected $fillable = ['item_name', 'item_price','quantity'];
+    protected $fillable = ['item_name', 'item_price', 'quantity', 'type', 'weight'];
 
+    public $timestamps = false;
 
-	public $timestamps = false;
- 
-	 
 }
